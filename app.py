@@ -35,17 +35,17 @@ def redirect_home_temp(message=None):
 
     import os
 
-    r1 = open('C:/Users/Dell/Desktop/CSVs/user.csv') # Here your csv file
+    r1 = open('C:/Users/Dell/Desktop/KeyStroke/user.csv') # Here your csv file
     r=csv.reader(r1)
     lines = list(r)
     lines[0][0] = tempvalue
-    writer1 = open('C:/Users/Dell/Desktop/CSVs/user.csv', 'w', newline='')
+    writer1 = open("C:/Users/Dell/Desktop/KeyStroke/user.csv", 'w', newline='')
     writer=csv.writer(writer1)
     writer.writerows(lines)
     writer1.close()
     r1.close()
-    r1=open("C:/Users/Dell/Desktop/CSVs/user.csv")
-    fout=open("C:/Users/Dell/Desktop/Software Implem/credit/Trial_fromt end/src/keystroke.trial.csv","a")
+    r1=open("C:/Users/Dell/Desktop/KeyStroke/user.csv")
+    fout=open("C:/Users/Dell/Desktop/KeyStroke/keystroke.trial.csv","a")
     for line in r1:
         fout.write(line)
     fout.close()
@@ -88,7 +88,7 @@ def redirect_home_temp(message=None):
 
             for subject in subjects:
                 genuine_user_data = data.loc[data.subject == tempvalue,"H.period":"UD.l.Return"]
-
+                print(genuine_user_data)
                 imposter_data = data.loc[data.subject != tempvalue, :]
 
                 self.train = genuine_user_data[-1:]
@@ -103,7 +103,7 @@ def redirect_home_temp(message=None):
                 break
             return np.mean(eers)
 
-    path = "C:/Users/Dell/Desktop/Software Implem/credit/Trial_fromt end/src/keystroke.trial.csv"
+    path = "C:/Users/Dell/Desktop/KeyStroke/keystroke.trial.csv"
     data = pd.read_csv(path)
     subjects = data["subject"].unique()
     print(subjects)
@@ -122,18 +122,22 @@ def redirect_reg_captcha(message=None):
     import numpy as np
     np.set_printoptions(suppress=True)
 
-    r1 = open('C:/Users/Dell/Desktop/CSV_reg/user.csv')  # Here your csv file
+    r1 = open("C:/Users/Dell/Desktop/KeyStroke/user.csv")  # Here your csv file
     r = csv.reader(r1)
     lines = list(r)
     for i in range(20):
         lines[i][0] = tempvalue_reg
-    writer1 = open('C:/Users/Dell/Desktop/CSV_reg/user.csv', 'w')
-    writer = csv.writer(writer1)
-    writer.writerows(lines)
-    writer1.close()
+    with open("user.csv","w",newline="") as f:
+        writer = csv.writer(f)
+        writer.writerows(lines)
+
+    #writer1 = open("D:/F11/STUDIES/SEM7/HCI/PROJECT/Keystroke/user.csv", 'w')
+    #writer = csv.writer(writer1)
+    #writer.writerows(lines)
+    #writer1.close()
     r1.close()
-    r1 = open("C:/Users/Dell/Desktop/CSV_reg/user.csv")
-    fout = open("C:/Users/Dell/Desktop/Software Implem/credit/Trial_fromt end/src/keystroke.trial.csv", "a")
+    r1 = open("C:/Users/Dell/Desktop/KeyStroke/user.csv")
+    fout = open("C:/Users/Dell/Desktop/KeyStroke/keystroke.trial.csv", "a")
     for line in r1:
         fout.write(line)
     fout.close()
